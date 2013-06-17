@@ -1,13 +1,18 @@
 {
+  "manifest_version": 2,
   "name": "MusicVkontakte",
-  "version": "1.0",
+  "version": "1.2",
   "description": "Download music from vk.com/vkontake.ru social network to your computer.",
-  "background_page": "bg.html",
+  "background": {
+    "scripts": ["bg.js"]
+  },
   "page_action": {
     "default_icon" : "icon.png",
     "default_title" : "Click to show music links"
   },
   "permissions": [
-    "tabs", "http://*/*", "https://*/*"
+    "tabs",
+    "http://www.vk.com/*", "http://vk.com/*",
+    "https://www.vkontakte.ru/*", "https://vkontakte.ru/*"
   ]
 }
