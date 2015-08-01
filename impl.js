@@ -79,9 +79,33 @@ ru.chupakabr.kontaktMusic.findAudio = function(node) {
 				//alert('not matched ' + node.innerHTML);
 			}
 		}
-		
+
+		// Find filename, i.e. group and title
+		var filename = '';
+		var titleDiv = node.getElementsByClassName("title_wrap")[0];
+		if (titleDiv) {
+			// group name
+			var groupNameDiv = titleDiv.getElementsByTagName("b")[0];
+			if (groupNameDiv) {
+				var groupNameHref = groupNameDiv.getElementsByTagName("a")[0];
+				if (groupNameHref) {
+					filename = groupNameHref.textContent + ' - ';
+				}
+			}
+
+			// composition name
+			var titleNameDiv = titleDiv.getElementsByClassName("title")[0];
+			if (titleNameDiv) {
+				filename += titleNameDiv.textContent;
+			}
+		}
+
 		// Insert download link
-		node.innerHTML = '<a href="' + dwnlLink + '">Скачать</a>' + node.innerHTML;
+		if (filename != '') {
+			node.innerHTML = '<a download="' + filename + '" href="' + dwnlLink + '">Скачать</a>' + node.innerHTML;
+		} else {
+			node.innerHTML = '<a href="' + dwnlLink + '">Скачать</a>' + node.innerHTML;
+		}
 	} else if (node.childNodes.length > 0) {
 		for (var j = 0; j < node.childNodes.length; j++) {
 			e = node.childNodes[j];
