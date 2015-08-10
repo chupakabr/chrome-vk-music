@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "MusicVkontakte",
-  "version": "1.4",
+  "version": "1.5",
   "description": "Download music from vk.com/vkontake.ru social network to your computer.",
   "background": {
     "scripts": ["bg.js"]

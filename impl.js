@@ -4,6 +4,8 @@ if (!ru) { var ru = {}; }
 if (!ru.chupakabr) { ru.chupakabr = {}; }
 if (!ru.chupakabr.kontaktMusic) { ru.chupakabr.kontaktMusic = {}; }
 
+ru.chupakabr.kontaktMusic.audioExtraClassName = "vk-music-link-vc";
+
 ru.chupakabr.kontaktMusic.run = function() {
 	//alert('<0>');
 	
@@ -29,6 +31,11 @@ ru.chupakabr.kontaktMusic.run = function() {
 		if (root) {
 			//alert('<3>');
 			//alert('<length = ' + root.childNodes.length);
+
+			// Remove all previously created links
+			ru.chupakabr.kontaktMusic.removeAudioLinks();
+
+			// Add links for every found audio
 			for (var i = 0; i < root.childNodes.length; i++) {
 				e = root.childNodes[i];
 				ru.chupakabr.kontaktMusic.findAudio(e);
@@ -100,17 +107,25 @@ ru.chupakabr.kontaktMusic.findAudio = function(node) {
 			}
 		}
 
-		// Insert download link
+		// Insert download links
+		var classStr = ' class="' + ru.chupakabr.kontaktMusic.audioExtraClassName + '"';
 		if (filename != '') {
-			node.innerHTML = '<a download="' + filename + '" href="' + dwnlLink + '">Скачать</a>' + node.innerHTML;
+			node.innerHTML = '<a' + classStr + ' download="' + filename + '" href="' + dwnlLink + '">Скачать</a>' + node.innerHTML;
 		} else {
-			node.innerHTML = '<a href="' + dwnlLink + '">Скачать</a>' + node.innerHTML;
+			node.innerHTML = '<a' + classStr + ' href="' + dwnlLink + '">Скачать</a>' + node.innerHTML;
 		}
 	} else if (node.childNodes.length > 0) {
 		for (var j = 0; j < node.childNodes.length; j++) {
 			e = node.childNodes[j];
 			ru.chupakabr.kontaktMusic.findAudio(e);
 		}
+	}
+};
+
+ru.chupakabr.kontaktMusic.removeAudioLinks = function() {
+	var elements = document.getElementsByClassName(ru.chupakabr.kontaktMusic.audioExtraClassName);
+	while (elements.length > 0){
+		elements[0].parentNode.removeChild(elements[0]);
 	}
 };
 
